@@ -82,15 +82,10 @@ Array &operator-(int val){
 
 Array &operator-(const Array &other){
     if(this->size>other.size){
-        for(int i=0; i<this->size; i++){
+        for(int i=0; i<this->size && i<other.size; i++){
             this->arr[i]-=other.arr[i];
         }   
-    }else{
-        for(int i=0; i<other.size; i++){
-            this->arr[i]-=other.arr[i];
-        }   
-        
-    }
+    } 
 }
 bool operator<(const Array &other){
     return this->size<other.size;
