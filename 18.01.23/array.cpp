@@ -29,6 +29,27 @@ void print() const {
 std::cout<<"]\n";
 }
 
+void insert(int ind, int n){
+    if(ind>this->size||ind<0){
+         std::cout<<"error! invalid number\n";
+    }else{
+        this->arr[ind]=n;
+    }
+   
+}
+
+
+void erase(int index){
+    if(index>this->size||index<0){
+         std::cout<<"error! invalid number\n";
+    }else{
+        for(int i=index + 1; i<this->size; i++){
+            this->arr[i-1]=this->arr[i];
+        }
+        this->size-=1;
+    }
+}
+
 ~Array(){
     delete [] this->arr;
 }
@@ -48,5 +69,11 @@ int main(){
     arr.add_back(5);
     arr.add_back(6);
 
+    arr.print();
+
+    arr.insert(3, 22);
+    arr.print();
+
+    arr.erase(3);
     arr.print();
 }
