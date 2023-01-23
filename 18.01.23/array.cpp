@@ -101,6 +101,9 @@ bool operator>=(const Array &other){
 bool operator==(const Array &other){
     return this->size==other.size;
 }
+Array &operator[](int index){
+    return this->arr[index];
+}
 
 ~Array(){
     delete [] this->arr;
@@ -148,5 +151,7 @@ int main(){
     }
     arr-arr2;
     arr.print();
+
+    arr[2];
 
 }
