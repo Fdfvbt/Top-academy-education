@@ -24,6 +24,12 @@ Point operator+(int val){
 Point operator+(const Point &other){
     return Point(this->x+other.x, this->y+other.y);
 }
+Point operator-(int val){
+    return Point(this->x-val, this->y-val);
+}
+Point operator-(const Point &other){
+    return Point(this->x-other.x, this->y-other.y);
+}
 void print(){
     std::cout<<this->x<<" "<<this->y<<"\n\n";
 }
@@ -41,9 +47,9 @@ std::ostream &operator<<(std::ostream &out, const Point &point){
 
 }
 
-template <typename type>
+template <typename T>
 class Array {
-    type* arr;
+    T* arr;
     int size, cap;
 public:
     Array() {}
@@ -54,9 +60,9 @@ public:
 
     Array(const Array &other) : Array(other.arr, other.size){}
 
-    Array(const type* arr, int size){
+    Array(const T* arr, int size){
         this->cap=size * 2;
-        this->arr = new type[this->cap];
+        this->arr = new T[this->cap];
         this->size=size;
         for(int i=0; i<size; i++){
             this->arr[i]=arr[i];
@@ -64,7 +70,7 @@ public:
     }
 
     
-    type &operator[](int index){
+    T &operator[](int index){
         return this->arr[index];
     }
 
@@ -77,6 +83,68 @@ public:
         }
     }
 
+    
+    void add_back(T val){
+        arr[size]=val;
+        this->size+=1;
+    }
+
+    void delete_index(int index){
+        if(index>this->size||index<0){
+         std::cout<<"error! invalid number\n";
+    }else{
+        for(int i=index + 1; i<this->size; i++){
+            this->arr[i-1]=this->arr[i];
+            this->size-=1;
+        }
+    }
+    }
+    void add_index(T val, int index){
+        if(index>this->size||index<0){
+         std::cout<<"error! invalid number\n";
+    }else{
+        size+=1;
+            for(int i=size-1; i>index+1; i--){
+                arr[i]=arr[i+1];
+                if(i==index+1){
+                    arr[i]=val;
+                }
+            }
+        this->size+=1;
+    }
+    }
+
+
+    void plus_all(T val){
+        for(int i=0; i<this->size; i++){
+            this->arr[i]=this->arr[i]+val;
+        }
+    }
+
+    void minus_all(T val){
+        for(int i=0; i<this->size; i++){
+            this->arr[i]=this->arr[i]-val;
+        }
+    }
+
+    void add_back(T* arr, int size){
+        if(this->size+size>cap){
+            T* arr=new T[size*2];
+            for(int i=this->size; i<size; i++){
+                for(int j=0; j<size; j++){
+                      this->arr[i]=arr[j];
+                }
+            }
+            delete [] this->arr;
+            this->arr = arr;
+        }else{
+            for(int i=this->size; i<size; i++){
+                for(int j=0; j<size; j++){
+                      this->arr[i]=arr[j];
+                }
+            }
+        }
+    }
     ~Array(){
         delete [] this->arr;
     }
@@ -88,6 +156,7 @@ public:
             out<<array[i];
             out<<" ";
         }
+        return out;
     }
 
 template <typename T>
@@ -96,11 +165,46 @@ void print_any(const T& val){
 }
 
 int main(){
-    Point points[3] {Point(1,2), Point(3, 5), Point(9, 29)};
+    Point points[3] {Point(1,2), Point(3, 6), Point(8, 56)};
+    int size=rand()%10;
+    int* arr=new int[size];
 
-    int a[5]={1,2,3,4,5};
+    std::cout<<"size: "<<size<<"\n\n";
 
-    Array<Point> template_array(points, 3);
+    Array<Point> array_points(points, 3);
+    Array<int> array_int(arr, 5);
+    std::cout << "init points" << array_points << "\n";
+    std::cout << "init int"<< array_int << "\n\n";
 
-    template_array.print();
+    array_int.add_back(7);
+    array_points.add_back(Point(7, 1));
+    std::cout << "add_back(Point(7, 1))" << array_points << "\n";
+    std::cout << "add_back(7)" << array_int << "\n\n";
+
+    array_int.delete_index(2);
+    array_points.delete_index(2);
+    std::cout << "delete_index(2)" << array_points << "\n";
+    std::cout << "delete_index(2)" << array_int << "\n\n";
+
+    array_int.add_index(2, 1);
+    array_points.add_index(Point(2, 1), 1);
+    std::cout << "add_index(Point(2, 1), 1)" << array_points << "\n";
+    std::cout << "add_index(2, 1)" << array_int << "\n\n";
+
+    array_points.plus_all(Point(1, 1));
+    array_int.plus_all(1);
+    std::cout << "plus_all(Point(1,1))" << array_points << "\n";
+    std::cout << "plus_all(1)" << array_int << "\n\n";
+
+    array_points.minus_all(Point(2, 0));
+    array_int.minus_all(2);
+    std::cout << "minus_all(Point(2,0))" << array_points << "\n";
+    std::cout << "minus_all(2)"  << array_int << "\n\n";
+
+
+    array_points.add_back(points, size);
+    array_int.add_back(arr, size);
+    std::cout << "add_back(Point(arr,size))" << array_points << "\n";
+    std::cout << "add_back(arr, size)"  << array_int << "\n\n";
+
 }
