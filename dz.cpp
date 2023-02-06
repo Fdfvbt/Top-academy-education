@@ -21,19 +21,31 @@ public:
         std::cout<<"input b: ";
         std::cin>>b;
     }
-    void plus(int val){
-        val=val*this->b;
+    void plus(int a, int b){
+        if(this->b==b){
+        this->a+=a;
 
-        this->a=this->a+val;
+        }else{
+            int temp=this->b;
+            this->a*=b;
+            this->b*=b;
+            a*=temp;
+            b*=temp;
+            this->a+=a;
+        }
     }
-    void minus(int val){
-        plus(-val);
+    void minus(int a, int b){
+        this->a-=a;
     }
-    void ymnozh(int val){
-        this->a=val*this->a;
+    void ymnozh(int a, int b){
+        this->a*=a;
+        this->b*=b;
     }
-    void del(int val){
-        this->b=val*this->b;
+    void del(int a, int b){
+        int temp=this->a;
+        this->a=this->b;
+        this->b=temp;
+        ymnozh(a, b);
     }
 };
 
@@ -44,13 +56,13 @@ int main(){
     Drob copy = test;
 
     test.print();
-    test.plus(4);
+    test.plus(4, 5);
     test.print();
-    test.minus(3);
+    test.minus(6, 5);
     test.print();
-    test.ymnozh(5);
+    test.ymnozh(5, 3);
     test.print();
-    test.del(2);
+    test.del(5, 3);
     test.print();
 
 

@@ -42,10 +42,14 @@ int main(){
     cout<<"enter diap2: ";
     cin>>d2;
     int** a=new int*[size];
-    for(int j=0; j<size2; j++){
+    for(int j=0; j<size; j++){
         a[j]=new int[size2];
     }
     init(a, size, size2, d1, d2);
     print(a, size, size2);
     cout<<avg(a, size, size2);
+    for(int j=0; j<size; j++){
+        delete[] a[j];
+    }
+    delete[] a;
 }
