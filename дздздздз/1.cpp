@@ -137,7 +137,34 @@ void sort(char**arr, int size){
 int main(){
     srand(time(NULL));
     int size=rand()%10;
-    int** arr1=*new int[size];
-    double** arr2=new double[size];
-    char** arr3=new char[size];
+    int** arr1=new int*[size];
+    for(int i=0; i<size; i++){
+        arr1[i]=new int[size];
+    }
+    double** arr2=new double*[size];
+    for(int i=0; i<size; i++){
+        arr2[i]=new double[size];
+    }
+    char** arr3=new char*[size];
+    for(int i=0; i<size; i++){
+        arr3[i]=new char[size];
+    }
+    init(arr1, size);
+    init(arr2, size);
+    init(arr3, size);
+    print(arr1, size);
+    cout<<"\n";
+    print(arr2, size);
+    cout<<"\n";
+    print(arr3, size);
+    cout<<"\n";
+    max(arr1, size);
+    max(arr2, size);
+    max(arr3, size);
+    min(arr1, size);
+    min(arr2, size);
+    min(arr3, size);
+    sort(arr1, size);
+    sort(arr2, size);
+    sort(arr3, size);
 }
