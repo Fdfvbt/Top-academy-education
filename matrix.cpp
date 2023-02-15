@@ -6,7 +6,7 @@ class Matrix{
     int size;
 public:
     Matrix(){
-        size=1;
+        size=3;
         mat=new int*[size];
         for(int i=0; i<size; i++){
             this->mat[i]=new int[size];
@@ -21,6 +21,7 @@ public:
     }
     void print(){
         for(int i=0; i<size; i++){
+            std::cout<<"\n";
             for(int j=0; j<size; j++){
                 std::cout<<mat[i][j]<<" ";
             }
@@ -72,6 +73,28 @@ public:
             }
         }
     }
+    T min(){
+        int min;
+        for(int i=0; i<size; i++){
+            for(int j=0; j<size-1; j++){
+                if(mat[i][j]>mat[i][j+1]){
+                    min=mat[i][j+1];
+                }
+            }
+        }
+        return min;
+    }
+    T max(){
+        int max;
+        for(int i=0; i<size; i++){
+            for(int j=0; j<size-1; j++){
+                if(mat[i][j]<mat[i][j+1]){
+                    max=mat[i][j+1];
+                }
+            }
+        }
+        return max;
+    }
 };
 
 int main(){
@@ -96,4 +119,6 @@ int main(){
     test.print();
     test/2;
     test.print();
+    std::cout<<test.min()<<"\n\n";
+    std::cout<<test.max();
 }
