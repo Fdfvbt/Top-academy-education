@@ -21,7 +21,8 @@ public:
         }
     }
     T &operator=(){
-        this->
+        this->coast=other.coast;
+        this->type=other.type;
     }
     T &operator>(){
         if(this->type>other.type){
@@ -29,6 +30,10 @@ public:
         }else{
             return 0;
         }
+    }
+    void print(){
+        std::cout<<"coast: "<<coast;
+        std::cout<<"type: "<<type;
     }
 };
 
@@ -51,7 +56,8 @@ public:
         }
     }
     T &operator=(){
-        this->
+        this->s=other.s;
+        this->coast=other.coast;
     }
     T &operator>(){
         if(this->coast>other.coast){
@@ -65,4 +71,6 @@ public:
 int main(){
     Overcoat<float> test("Shuba", 2300.50);
     Overcoat<int> test2("Shuba", 4900);
+    test=test2;
+    test.print();
 }
