@@ -9,16 +9,16 @@ class Reservoir{
     int year;
 public:
     Reservoir(){
-        cout<<"enter avtor: ";
-        cin>>avtor;
-        cout<<"enter name of book: ";
-        cin>>name;
-        cout<<"enter izdatelstvo: ";
-        cin>>izd;
-        cout<<"enter kol-vo stranic: ";
-        cin>>strs;
-        cout<<"enter year: ";
-        cin>>year;
+        std::cout<<"enter avtor: ";
+        std::cin>>avtor;
+        std::cout<<"enter name of book: ";
+        std::cin>>name;
+        std::cout<<"enter izdatelstvo: ";
+        std::cin>>izd;
+        std::cout<<"enter kol-vo stranic: ";
+        std::cin>>strs;
+        std::cout<<"enter year: ";
+        std::cin>>year;
         
     }
 
@@ -32,7 +32,7 @@ public:
         this->year=year;
     }
 
-    book_by_avtor(std::string avtor) const {
+    void book_by_avtor(std::string avtor) const {
         std::cout<<name;
     }
 };
